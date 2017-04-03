@@ -1,15 +1,15 @@
 {
   "name": "express-dirview-middleware",
   "version": "1.0.2",
-  "description": "## View",
-  "main": "index.js",
+  "description": "express-dirview-middleware",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "babel src -d dist -w -D",
     "build": "babel src -d dist -D",
     "prepublish": "npm run build"
   },
-  "keywords": [],
+  "keywords": ["express", "dirview", "middleware"],
   "author": "moyu",
   "license": "MIT",
   "devDependencies": {
