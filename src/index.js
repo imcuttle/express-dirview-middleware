@@ -9,8 +9,8 @@ const TemplateWithLayout = require('./helpers/TemplateWithLayout');
 const Template = require('./helpers/Template');
 
 
-const getFilesStatPromise = (dirname) => {
-    return helper.readDirPromise(dirname)
+const getFilesStatPromise = (dirname, filter) => {
+    return helper.readDirPromise(dirname, filter)
         .then(files =>
             Promise.all(
                 files.map(
@@ -58,7 +58,7 @@ const template = new TemplateWithLayout();
 template.set("directory", tableHtml);
 
 module.exports = function (options) {
-    const {root: dir=".", redirect = false} = options;
+    const {root: dir=".", redirect = false, filter = () => true} = options;
     return function (req, res, next) {
         const error = (error) => res.send(error);
 
@@ -115,7 +115,7 @@ module.exports = function (options) {
         switch (pathname) {
             case '/': {
                 // root
-                getFilesStatPromise(filename)
+                getFilesStatPromise(filename, filter)
                     .then(list => {
                         renderDirPage(pathname, list);
                     }).catch(error);
